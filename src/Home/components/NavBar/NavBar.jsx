@@ -19,8 +19,8 @@ export default function NavBar() {
 
 
     return (
-        <div className='flex justify-between items-center bg-white h-16 rounded-xl px-5 py-2 mb-5'>
-            <h1 className='uppercase text-xl font-bold tracking-wider'>company.logo</h1>
+        <div className='flex justify-between items-center bg-white h-14 rounded-xl px-3 py-2 mb-5'>
+            <h1 className='uppercase text-xl font-bold tracking-wider ms-5'>company</h1>
             <div className='flex gap-5'>
                 {
                     buttons.map((button, index) => (
