@@ -2,19 +2,28 @@ import { useState } from 'react';
 import PageTitle from '../../../PageTitle/PageTitle'
 import LinkBoxes from './LinkBoxes/LinkBoxes'
 import { useForm } from 'react-hook-form'
+import { useOutletContext } from 'react-router-dom';
 
 export default function LinkEditor() {
-
-    const { register, handleSubmit } = useForm();
+    const { handleLinkDataChange } = useOutletContext();
+    const { register, handleSubmit, reset } = useForm();
     const [linkBoxes, setLinkBoxes] = useState([]);
     const [nextId, setNextId] = useState(1);
 
     const onSubmit = (data) => {
-        console.log(data)
+        const formattedData = linkBoxes.map(box => ({
+            id: `${box.id}-${Date.now()}`,
+            link: data[`link_${box.id}`],
+            platform: data[`platform_${box.id}`],
+        }));
+        handleLinkDataChange(formattedData);
+        reset();
+        setLinkBoxes([]);
+        setNextId(1);
     }
 
     const addLinkBox = () => {
-        setLinkBoxes((prev) => [...prev, { id: nextId }]);
+        setLinkBoxes((prev) => [{ id: nextId }, ...prev]);
         setNextId((prev) => prev + 1);
     };
 
@@ -36,7 +45,7 @@ export default function LinkEditor() {
                 <p className='text-sm mt-1'>Add/edit/remove links below and then share all your profiles with the world!</p>
                 <button className='my-7 border border-purple-500 text-purple-500 w-full py-1 rounded-md hover:bg-purple-500 hover:text-white font-medium' onClick={addLinkBox}>+ Add new link</button>
             </div>
-            <div className=' h-[calc(100vh-360px)] overflow-y-scroll border-b -mx-7'>
+            <div className=' h-[calc(100vh-360px)] border-b -mx-7 scrollable'>
                 <form className='mx-7' onSubmit={handleSubmit(onSubmit)}>
                     {linkBoxes.map((box) => (
                         <LinkBoxes

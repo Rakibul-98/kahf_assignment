@@ -11,32 +11,32 @@ export default function LinkBoxes({ register, removeLinkBox, id }) {
   const handleSelect = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
-    register('platform', { value: option.value, required: true });
+    register(`platform_${id}`, { value: option.value, required: true });
   };
 
   const linkOptions = [
     {
-      value: 'github',
+      value: 'GitHub',
       label: 'GitHub',
       icon: <TbBrandGithubFilled />
     },
     {
-      value: 'youtube',
+      value: 'YouTube',
       label: 'YouTube',
       icon: <FaYoutube />
     },
     {
-      value: 'linkedin',
+      value: 'Linkedin',
       label: 'LinkedIn',
       icon: <FaLinkedin />
     },
     {
-      value: 'facebook',
+      value: 'Facebook',
       label: 'Facebook',
       icon: <FaFacebookSquare />
     },
     {
-      value: 'instagram',
+      value: 'Instagram',
       label: 'Instagram',
       icon: <FaInstagramSquare />
     }
@@ -50,7 +50,7 @@ export default function LinkBoxes({ register, removeLinkBox, id }) {
       </div>
       <div className='space-y-2'>
         <div>
-          <label htmlFor="platform">Platform</label>
+          <label htmlFor={`platform_${id}`}>Platform</label>
           <div className="relative">
             <div onClick={() => setIsOpen(!isOpen)} className="form-control ps-3 w-full border p-1 outline-none rounded-md bg-white cursor-pointer">
               {selectedOption ? (
@@ -76,8 +76,8 @@ export default function LinkBoxes({ register, removeLinkBox, id }) {
           </div>
         </div>
         <div className='relative'>
-          <label htmlFor="link">Link</label>
-          <input className=' form-control ps-10 border w-full rounded-md outline-none p-1' {...register("name2", { required: true })} />
+          <label htmlFor={`link_${id}`}>Link</label>
+          <input className=' form-control ps-10 border w-full rounded-md outline-none p-1' {...register(`link_${id}`, { required: true })} />
           <span className='absolute bottom-[10px] left-3 text-gray-500'><FaLink /></span>
         </div>
       </div>
