@@ -56,7 +56,7 @@ export default function LinkEditor() {
                         />
                     ))}
 
-                    <input className='absolute bottom-5 right-7 rounded-md font-medium cursor-pointer hover:bg-purple-700 bg-purple-500 text-white py-1 px-5' type="submit" />
+                    <input className='absolute bottom-5 right-7 rounded-md font-medium cursor-pointer hover:bg-purple-700 bg-purple-500 text-white py-1 px-5' type="submit" value="Save" />
                 </form>
             </div>
         </div >
