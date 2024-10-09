@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <div className=' bg-[#FAFAFA] h-screen flex flex-col p-5'>
             <NavBar/>
-            <div className='flex-1 grid grid-cols-5 gap-5'>
+            <div className='relative flex-1 grid grid-cols-5 gap-5'>
                 <div className='col-span-2 flex justify-center bg-white items-center rounded-xl'>
                     <MobileMockup />
                 </div>
