@@ -5,10 +5,8 @@ import { FaArrowRight, FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaYoutub
 
 export default function MobileMockup({ linkData, profileData }) {
 
-  console.log(profileData);
-
   const totalSkeletons = 5;
-  const displayedLinks = linkData.slice(0, totalSkeletons);
+  const displayedLinks = linkData;
 
   const platformData = {
     GitHub: {
@@ -35,13 +33,13 @@ export default function MobileMockup({ linkData, profileData }) {
 
   return (
     <div className=''>
-      <div className='mobile-outer relative p-2 h-[450px] w-[260px] border-2 rounded-[50px]'>
+      <div className='mobile-outer relative p-2 h-[450px] w-[250px] border-2 rounded-[50px]'>
         <div className='notch absolute w-[140px] h-[18px] left-1/2 transform -translate-x-1/2 top-2 rounded-b-[10px] border-2 border-t-0 bg-white' />
         <div className='mobile-inner p-4 pt-8 h-full border-2 rounded-[40px] bg-transparent'>
           <div>
             <ProfileSkeleton profileData={profileData} />
           </div>
-          <div className='mt-6 space-y-[10px] h-[230px] scrollable'>
+          <div className={`${profileData ? 'mt-6': 'mt-8'} space-y-[10px] h-[240px] scrollable`}>
             {displayedLinks.map((link) => (
               <div key={link.id} className={`link-item ${platformData[link.platform]?.bgColor || 'bg-gray-300'} h-9 rounded-lg flex items-center px-4`}>
                 <div className='flex items-center w-full justify-between text-white'>

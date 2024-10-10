@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PageTitle from '../../../PageTitle/PageTitle';
 import { useForm } from 'react-hook-form';
 import { useOutletContext } from 'react-router-dom';
+import UploadImage from './UploadImage/UploadImage';
+import toast from 'react-hot-toast';
+import { SiMdbook } from 'react-icons/si';
 
 export default function ProfileEditor() {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, setValue } = useForm();
     const { handleProfileDataChange } = useOutletContext();
+    const [image, setImage] = useState(null);
 
     const onSubmit = (data) => {
         const profileData = {
-            ...data,
-            profilePicture: data.profilePicture.length > 0 ? data.profilePicture[0] : null,
+            ...data
         };
         handleProfileDataChange(profileData);
+        toast('Your changes have been successfully saved!', {
+            icon: <SiMdbook />,
+        });
         reset();
+        setImage(null);
     };
 
     const inputFields = [
@@ -30,16 +37,14 @@ export default function ProfileEditor() {
                 <p className='text-sm mt-1'>Add your details to create a personal touch to your profile.</p>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className='h-[calc(100vh-310px)] mt-6 space-y-4'>
-                <div className='h-1/2 bg-[#FAFAFA] rounded-xl grid grid-cols-3 items-center px-5'>
-                    <p>Profile Picture</p>
-                    <input type="file" {...register('profilePicture')} />
-                    <p className='text-sm'>Image must be below 1024x1024px. <br />Use PNG, JPG or BMP format.</p>
+                <div className='h-1/2 bg-[#FAFAFA] rounded-xl '>
+                    <UploadImage image={image} setImage={setImage} setValue={setValue} />
                 </div>
                 <div className='h-1/2 bg-[#FAFAFA] rounded-xl grid content-between ps-5 p-3'>
                     {inputFields.map(({ label, type, registerKey }, index) => (
                         <div className='grid grid-cols-3' key={index}>
                             <p>{label}</p>
-                            <input className='col-span-2 border rounded-lg py-2 px-3 outline-none text-sm' type={type} {...register(registerKey)} />
+                            <input className='col-span-2 border rounded-lg py-2 px-3 outline-none text-sm' type={type} {...register(registerKey)}  />
                         </div>
                     ))}
                 </div>

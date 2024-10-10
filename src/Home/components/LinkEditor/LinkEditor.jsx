@@ -3,6 +3,7 @@ import PageTitle from '../../../PageTitle/PageTitle'
 import LinkBoxes from './LinkBoxes/LinkBoxes'
 import { useForm } from 'react-hook-form'
 import { useOutletContext } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 export default function LinkEditor() {
     const { handleLinkDataChange } = useOutletContext();
@@ -17,6 +18,8 @@ export default function LinkEditor() {
             platform: data[`platform_${box.id}`],
         }));
         handleLinkDataChange(formattedData);
+        toast.success('Your links successfully saved!', {
+        });
         reset();
         setLinkBoxes([]);
         setNextId(1);
