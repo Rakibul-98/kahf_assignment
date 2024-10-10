@@ -10,7 +10,7 @@ export default function ProfileSkeleton() {
             {profileData.profilePicture ? (
                 <div className="bg-zinc-200 h-[65px] w-[65px] rounded-full">
                     <img
-                        src={URL.createObjectURL(profileData.profilePicture)}
+                        src={profileData.profilePicture}
                         alt="Profile"
                         className="h-full w-full object-cover rounded-full border-4 border-violet-500"
                     />

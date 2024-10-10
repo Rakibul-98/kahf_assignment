@@ -1,27 +1,35 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PageTitle from '../../../PageTitle/PageTitle';
 import { useForm } from 'react-hook-form';
-import { useOutletContext } from 'react-router-dom';
 import UploadImage from './UploadImage/UploadImage';
 import toast from 'react-hot-toast';
 import { SiMdbook } from 'react-icons/si';
 import { AppContext } from '../../../context/AppContext';
 
 export default function ProfileEditor() {
-    const { register, handleSubmit, reset, setValue } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
     const { handleProfileDataChange } = useContext(AppContext);
     const [image, setImage] = useState(null);
 
+    useEffect(() => {
+        const savedProfileData = JSON.parse(localStorage.getItem('profileData')) || {};
+        if (savedProfileData) {
+            setValue('fName', savedProfileData.fName || '');
+            setValue('lName', savedProfileData.lName || '');
+            setValue('email', savedProfileData.email || '');
+            setImage(savedProfileData.profilePicture || null);
+        }
+    }, [setValue]);
+
     const onSubmit = (data) => {
         const profileData = {
-            ...data
+            ...data,
+            profilePicture: image
         };
         handleProfileDataChange(profileData);
         toast('Your changes have been successfully saved!', {
             icon: <SiMdbook />,
         });
-        reset();
-        setImage(null);
     };
 
     const inputFields = [
@@ -45,7 +53,7 @@ export default function ProfileEditor() {
                     {inputFields.map(({ label, type, registerKey }, index) => (
                         <div className='grid grid-cols-3' key={index}>
                             <p>{label}</p>
-                            <input className='col-span-2 border rounded-lg py-2 px-3 outline-none text-sm' type={type} {...register(registerKey)}  />
+                            <input className='col-span-2 border rounded-lg py-2 px-3 outline-none text-sm' type={type} {...register(registerKey)}  required/>
                         </div>
                     ))}
                 </div>

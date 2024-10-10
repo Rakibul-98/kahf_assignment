@@ -4,10 +4,14 @@ export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
     const [linkData, setLinkData] = useState([]);
-    const [profileData, setProfileData] = useState([]);
+    const [profileData, setProfileData] = useState(() => {
+        return JSON.parse(localStorage.getItem('profileData')) || [];
+    });
     const totalSkeletons = 5;
     const displayedLinks = linkData;
     const [previewActive, setPreviewActive] = useState(false);
+
+    console.log(profileData);
 
     const handleLinkDataChange = (newData) => {
         setLinkData((prevData) => [...prevData, ...newData]);
@@ -15,6 +19,7 @@ export const AppProvider = ({ children }) => {
 
     const handleProfileDataChange = (newData) => {
         setProfileData(newData);
+        localStorage.setItem('profileData', JSON.stringify(newData));
     };
 
     return (

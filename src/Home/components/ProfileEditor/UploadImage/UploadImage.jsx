@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { LiaImage } from "react-icons/lia";
 
 export default function UploadImage({ setValue, image, setImage }) {
@@ -25,9 +24,9 @@ export default function UploadImage({ setValue, image, setImage }) {
                 >
                     {image ? (
                         <div className="h-full w-full relative ">
-                            <img src={image} alt="Uploaded" className="w-full h-full object-cover rounded-lg opacity-60" />
+                            <img src={image} alt="Uploaded" className="w-full h-full object-cover rounded-lg opacity-40" />
 
-                            <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
                                 <span className="text-2xl"><LiaImage /></span>
                                 <p className="text-sm">Change Image</p>
                             </div>
