@@ -6,7 +6,7 @@ export default function ProfileSkeleton() {
     const { profileData, previewActive } = useContext(AppContext);
 
     return (
-        <div className="flex gap-2 flex-col items-center">
+        <div className="flex gap-2 flex-col items-center mt-2">
             {profileData.profilePicture ? (
                 <div className="bg-zinc-200 h-[65px] w-[65px] rounded-full">
                     <img

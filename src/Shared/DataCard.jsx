@@ -34,17 +34,18 @@ export default function DataCard() {
     };
 
     return (
-        <div className='mobile-inner p-4 pt-8 h-full bg-transparent'>
+        <div className={`mobile-inner p-4 pt-5 h-full bg-transparent`}>
             <div>
                 <ProfileSkeleton />
             </div>
-            <div className={`${profileData ? 'mt-6' : 'mt-8'} space-y-[10px] h-[240px] scrollable`}>
+            <div className={`${profileData ? 'mt-6' : 'mt-8'} space-y-[10px] h-[234px] scrollable`}>
                 {displayedLinks.map((link) => (
                     <div key={link.id} className={`link-item ${platformData[link.platform]?.bgColor || 'bg-gray-300'} h-9 rounded-lg flex items-center px-4`}>
                         <div className='flex items-center w-full justify-between text-white'>
                             <div className='flex items-center'>
                                 {platformData[link.platform]?.icon || null}
                                 <span className='ml-2'>{link.platform}</span>
+                                {/* <span className='ml-2'>{link.link}</span> */}
                             </div>
                             <span className='text-xs'><FaArrowRight /></span>
                         </div>
