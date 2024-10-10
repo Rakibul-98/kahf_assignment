@@ -1,8 +1,12 @@
+import { useContext } from 'react';
 import { FaLink } from 'react-icons/fa'
 import { HiOutlineUserCircle } from 'react-icons/hi'
 import { Link, NavLink } from 'react-router-dom';
+import { AppContext } from '../../../context/AppContext';
 
 export default function NavBar() {
+
+    const {setPreviewActive} = useContext(AppContext);
 
     const buttons = [
         {
@@ -19,7 +23,7 @@ export default function NavBar() {
 
 
     return (
-        <div className='flex justify-between items-center bg-white h-14 rounded-xl px-3 py-2 mb-5'>
+        <div className='common-nav'>
             <h1 className='uppercase text-xl font-bold tracking-wider ms-5'>company</h1>
             <div className='flex gap-5'>
                 {
@@ -32,7 +36,7 @@ export default function NavBar() {
                     ))
                 }
             </div>
-            <Link className='py-1 px-5 border hover:bg-purple-50 border-purple-500 rounded-md text-purple-500' to="/preview">Preview</Link>
+            <Link className='py-1 px-5 border hover:bg-purple-50 border-purple-500 rounded-md text-purple-500' to="/preview" onClick={()=>setPreviewActive(true)}>Preview</Link>
         </div>
     )
 }

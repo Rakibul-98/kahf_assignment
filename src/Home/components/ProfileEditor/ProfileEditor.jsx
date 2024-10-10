@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PageTitle from '../../../PageTitle/PageTitle';
 import { useForm } from 'react-hook-form';
 import { useOutletContext } from 'react-router-dom';
 import UploadImage from './UploadImage/UploadImage';
 import toast from 'react-hot-toast';
 import { SiMdbook } from 'react-icons/si';
+import { AppContext } from '../../../context/AppContext';
 
 export default function ProfileEditor() {
     const { register, handleSubmit, reset, setValue } = useForm();
-    const { handleProfileDataChange } = useOutletContext();
+    const { handleProfileDataChange } = useContext(AppContext);
     const [image, setImage] = useState(null);
 
     const onSubmit = (data) => {

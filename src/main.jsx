@@ -6,11 +6,12 @@ import React from "react";
 import LinkEditor from "./Home/components/LinkEditor/LinkEditor.jsx";
 import ProfileEditor from "./Home/components/ProfileEditor/ProfileEditor.jsx";
 import Preview from "./Home/components/Preview/Preview.jsx";
+import { AppProvider } from "./context/AppContext.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>,
+    element: <Home />,
     children: [
       {
         path: "",
@@ -18,17 +19,17 @@ const router = createBrowserRouter([
       },
       {
         path: "link-editor",
-        element: <LinkEditor/>,
+        element: <LinkEditor />,
       },
       {
         path: "profile-editor",
-        element: <ProfileEditor/>,
+        element: <ProfileEditor />,
       }
     ],
   },
   {
     path: "/preview",
-    element: <Preview/>,
+    element: <Preview />,
   },
   {
     path: "*",
@@ -38,6 +39,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AppProvider>
+      <RouterProvider router={router} />
+    </AppProvider>
   </React.StrictMode>
 );

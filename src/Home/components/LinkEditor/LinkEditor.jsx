@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import PageTitle from '../../../PageTitle/PageTitle'
 import LinkBoxes from './LinkBoxes/LinkBoxes'
 import { useForm } from 'react-hook-form'
-import { useOutletContext } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { AppContext } from '../../../context/AppContext';
 
 export default function LinkEditor() {
-    const { handleLinkDataChange } = useOutletContext();
+    const { handleLinkDataChange } = useContext(AppContext);
     const { register, handleSubmit, reset } = useForm();
     const [linkBoxes, setLinkBoxes] = useState([]);
     const [nextId, setNextId] = useState(1);
