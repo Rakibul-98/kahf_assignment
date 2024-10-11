@@ -35,9 +35,7 @@ export default function DataCard() {
 
     return (
         <div className={`mobile-inner p-4 pt-5 h-full bg-transparent`}>
-            <div>
-                <ProfileSkeleton />
-            </div>
+            <ProfileSkeleton />
             <div className={`${profileData ? 'mt-6' : 'mt-8'} space-y-[10px] h-[234px] scrollable-link`}>
                 {displayedLinks.map((link) => (
                     <div

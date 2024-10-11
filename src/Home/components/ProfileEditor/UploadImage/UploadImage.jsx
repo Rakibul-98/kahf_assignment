@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+
+
 import { LiaImage } from "react-icons/lia";
 
 export default function UploadImage({ setValue, image, setImage }) {

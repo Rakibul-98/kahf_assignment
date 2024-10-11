@@ -1,7 +1,6 @@
 import MobileMockup from './components/MobileMockup/MobileMockup'
 import { Outlet } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
-import { useState } from 'react'
 import { Toaster } from 'react-hot-toast';
 
 

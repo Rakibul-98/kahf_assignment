@@ -1,7 +1,7 @@
 
 # Link Plus
 
-Link Plus is a professional link-sharing app where user can add, read, update, and delete links effortlessly. Users can set profile details, including a profile picture. It allows real-time validations for input errors. The app features drag-and-drop functionality for reordering links. It also provides previews(mobile mockup for large screen) for shared links, ensuring a seamless user experience. Integrated local storage to store data locally with React Context Management. Users can also preview their Link Plus profile and easily copy the profile link to their clipboard. The interface is completely optimized and responsive for various screen sizes, with some hover effects for all interactive elements to enhance usability.
+__Link Plus__ is a professional link-sharing app where user can add, read, update, and delete links effortlessly. Users can set profile details, including a profile picture. It allows __real-time validations__ for input errors. The app features __drag-and-drop__ functionality for reordering links. It also provides previews(mobile mockup for large screen) for shared links, ensuring a seamless user experience. Integrated __local storage__ to store data locally with React __Context Management__. Users can also preview their Link Plus profile and easily __copy__ the profile link to their clipboard. The interface is completely optimized and responsive for various screen sizes, with some hover effects for all interactive elements to enhance usability.
 
 
 
@@ -31,6 +31,8 @@ Link Plus is a professional link-sharing app where user can add, read, update, a
 - Local storage
 - Vercel
 ## Demo
+Live Link: [https://link-plus-rakibul.vercel.app](https://link-plus-rakibul.vercel.app/)
+
 ![Full Demo](https://i.ibb.co.com/nBqjV2L/mockup.png)
 ### Desktop view
 ![Desktop](https://i.ibb.co.com/fNzLRGF/desktop.png)
