@@ -39,25 +39,25 @@ export default function ProfileEditor() {
     ];
 
     return (
-        <div className='p-7'>
+        <div className='px-5 py-0 md:py-5 md:px-7'>
             <PageTitle title="Home - Edit profile" />
             <div>
                 <h3 className='text-2xl font-bold'>Profile Details</h3>
                 <p className='text-sm mt-1'>Add your details to create a personal touch to your profile.</p>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className='h-[calc(100vh-310px)] mt-6 space-y-4'>
-                <div className='h-1/2 bg-[#FAFAFA] rounded-xl '>
+            <form onSubmit={handleSubmit(onSubmit)} className='h-[calc(100vh-275px)]  mt-5 pb-7 space-y-4 border-b scrollable-profile'>
+                <div className='md:h-1/2 bg-[#FAFAFA] rounded-xl p-3'>
                     <UploadImage image={image} setImage={setImage} setValue={setValue} />
                 </div>
-                <div className='h-1/2 bg-[#FAFAFA] rounded-xl grid content-between ps-5 p-3'>
+                <div className='md:h-1/2 mb-5 bg-[#FAFAFA] rounded-xl grid content-between ps-3 md:ps-5 p-3'>
                     {inputFields.map(({ label, type, registerKey }, index) => (
-                        <div className='grid grid-cols-3' key={index}>
+                        <div className='grid md:grid-cols-3 mb-1' key={index}>
                             <p>{label}</p>
                             <input className='col-span-2 border rounded-lg py-2 px-3 outline-none text-sm' type={type} {...register(registerKey)}  required/>
                         </div>
                     ))}
                 </div>
-                <input className='absolute bottom-5 right-7 rounded-md font-medium cursor-pointer hover:bg-purple-700 bg-purple-500 text-white py-1 px-5' type="submit" value="Save" />
+                <input className='w-[calc(100%-55px)] md:w-fit absolute bottom-5 right-7 rounded-md font-medium cursor-pointer hover:bg-purple-700 bg-purple-500 text-white py-1 px-5' type="submit" value="Save" />
             </form>
         </div>
     );

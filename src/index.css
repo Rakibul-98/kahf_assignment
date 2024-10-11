@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-.scrollable {
+.scrollable-profile, .scrollable-link {
   overflow-y: auto;
   scrollbar-width: none;
 }
-
+@media (min-width: 768px) { /* Adjust the breakpoint as needed */
+  .scrollable-profile {
+      overflow-y: visible; /* Remove scrolling */
+  }
+}
 .common-nav{
   display: flex;
   justify-content: space-between;

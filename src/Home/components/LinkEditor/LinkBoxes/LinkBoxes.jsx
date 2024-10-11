@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { FaChevronDown, FaFacebookSquare, FaGripLines, FaInstagramSquare, FaLink, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { TbBrandGithubFilled } from 'react-icons/tb';
+import { AppContext } from '../../../../context/AppContext';
 
-export default function LinkBoxes({ register, unregister, removeLinkBox, id }) {
+export default function LinkBoxes({ register, unregister, setValue, id, defaultLink, defaultPlatform, removeLinkBox }) {
+  const { handleRemoveLink } = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [link, setLink] = useState('');
   const [error, setError] = useState('');
 
   const linkOptions = [
@@ -24,47 +25,45 @@ export default function LinkBoxes({ register, unregister, removeLinkBox, id }) {
       Facebook: link.includes('facebook.com'),
       Instagram: link.includes('instagram.com'),
     };
-    return isValid[platform] ? '' : `Please provide a valid ${platform} link`;
+    return isValid[platform];
   };
 
   const handleSelect = (option) => {
-    if (selectedOption) {
-      unregister(`platform_${id}`);
-    }
+    unregister(`platform_${id}`);
     setSelectedOption(option);
+    register(`platform_${id}`, { value: option.value });
     setIsOpen(false);
-    setLink('');
     setError('');
+    setValue(`link_${id}`, '');
   };
 
   const handleLinkChange = (e) => {
-    setLink(e.target.value);
+    const link = e.target.value;
+    const isValid = validateLink(selectedOption.value, link);
+    setError(isValid ? '' : `Invalid ${selectedOption.label} link`);
+    setValue(`link_${id}`, link);
   };
 
-  const handleLinkBlur = () => {
-    if (selectedOption) {
-      const linkValidationError = validateLink(selectedOption.value, link);
-      setError(linkValidationError);
-
-      if (!linkValidationError) {
-        register(`link_${id}`, { value: link });
-      }
-    }
+  const handleRemove = () => {
+    handleRemoveLink(id);
+    removeLinkBox();
   };
 
   useEffect(() => {
-    if (selectedOption) {
-      register(`platform_${id}`, { value: selectedOption.value });
-      const linkValidationError = validateLink(selectedOption.value, link);
-      setError(linkValidationError);
+    const selected = linkOptions.find(option => option.value === defaultPlatform);
+    if (selected) {
+      setSelectedOption(selected);
+      register(`platform_${id}`, { value: defaultPlatform });
     }
-  }, [selectedOption, register,id, link]);
+  }, [defaultPlatform, id, register]);
+
+
 
   return (
     <div className='bg-[#FAFAFA] p-3 mb-4 rounded-lg'>
       <div className='flex justify-between'>
-        <h2 className='flex items-center gap-2'><FaGripLines />Link #{id.split('-')[0]}</h2>
-        <button className='hover:text-red-500 font-medium' onClick={removeLinkBox}>Remove</button>
+        <h2 className='flex items-center gap-2'><FaGripLines />Link #{id}</h2>
+        <button className='hover:text-red-500 font-medium' onClick={handleRemove}>Remove</button>
       </div>
       <div className='space-y-2'>
         <div>
@@ -101,9 +100,9 @@ export default function LinkBoxes({ register, unregister, removeLinkBox, id }) {
           <label htmlFor={`link_${id}`}>Link</label>
           <input
             className={`form-control ps-10 border w-full rounded-md outline-none p-1 `}
-            value={link}
+            {...register(`link_${id}`)}
             onChange={handleLinkChange}
-            onBlur={handleLinkBlur}
+            defaultValue={defaultLink || ''}
             required
           />
           <span className='absolute bottom-[10px] left-3 text-gray-500'><FaLink /></span>

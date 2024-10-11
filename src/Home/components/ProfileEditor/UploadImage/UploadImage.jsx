@@ -15,11 +15,11 @@ export default function UploadImage({ setValue, image, setImage }) {
     };
 
     return (
-        <div className="h-full grid grid-cols-3 items-center px-5">
+        <div className="h-full grid md:grid-cols-3 gap-2 grid-flow-row items-center px-2 md:px-5">
             <p className="">Profile Picture</p>
             <div className="">
                 <label
-                    className="flex items-center justify-center border border-gray-400 rounded-lg w-32 h-32 cursor-pointer"
+                    className="flex items-center justify-center border border-gray-400 rounded-lg w-28 h-28 md:w-32 md:h-32 cursor-pointer"
                     htmlFor="file-upload"
                 >
                     {image ? (
