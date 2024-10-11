@@ -9,7 +9,7 @@ import { AppContext } from '../../../context/AppContext';
 
 export default function LinkEditor() {
     const { handleLinkDataChange, displayedLinks } = useContext(AppContext);
-    const { register, unregister, handleSubmit, setValue } = useForm();
+    const { reset, register, unregister, handleSubmit, setValue } = useForm();
     const [linkBoxes, setLinkBoxes] = useState([]);
     const [nextId, setNextId] = useState(1);
     const sectionRef = useRef(null);
@@ -70,6 +70,7 @@ export default function LinkEditor() {
             }
             return updatedBoxes;
         });
+        reset();
     };
 
     const moveLink = (fromIndex, toIndex) => {

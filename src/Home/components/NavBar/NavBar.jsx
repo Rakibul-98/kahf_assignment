@@ -25,7 +25,7 @@ export default function NavBar() {
 
     return (
         <div className='common-nav'>
-            <h1 className='uppercase text-xl font-bold tracking-wider md:ms-5'><span className='hidden md:block'>company</span> <span className='block md:hidden'>logo</span></h1>
+            <h1 className='uppercase text-xl font-bold tracking-wider md:ms-5 cursor-default'><span>link<sup className='hidden md:inline text-purple-600'> plus</sup><sup className='md:hidden font-extrabold text-purple-600'>+</sup></span></h1>
             <div className='flex gap-5'>
                 {
                     buttons.map((button, index) => (
@@ -37,7 +37,7 @@ export default function NavBar() {
                     ))
                 }
             </div>
-            <Link className='py-3 md:py-1 px-5 border hover:bg-purple-50 border-purple-500 rounded-md text-purple-500' to="/preview" onClick={() => setPreviewActive(true)}><span className='hidden md:block'>Preview</span><FiEye className='block md:hidden' /></Link>
+            <Link className='py-3 md:py-1 px-5 border hover:bg-purple-500 hover:text-white border-purple-500 rounded-md text-purple-500' to="/preview" onClick={() => setPreviewActive(true)}><span className='hidden md:block'>Preview</span><FiEye className='block md:hidden' /></Link>
         </div>
     )
 }
