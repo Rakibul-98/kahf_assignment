@@ -1,7 +1,8 @@
 import { TbBrandGithubFilled } from "react-icons/tb";
-import ProfileSkeleton from "../Home/components/MobileMockup/profileSkeleton/ProfileSkeleton";
 import { FaArrowRight, FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaYoutube } from "react-icons/fa";
 import LinkSkeleton from "../Home/components/MobileMockup/LinkSkeleton/LinkSkeleton";
+import ProfileSkeleton from "../Home/components/MobileMockup/ProfileSkeleton/ProfileSkeleton";
+
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
@@ -35,7 +36,7 @@ export default function DataCard() {
 
     return (
         <div className={`mobile-inner p-4 pt-5 h-full bg-transparent`}>
-            <ProfileSkeleton />
+            <ProfileSkeleton/>
             <div className={`${profileData ? 'mt-6' : 'mt-8'} space-y-[10px] h-[234px] scrollable-link`}>
                 {displayedLinks.map((link) => (
                     <div

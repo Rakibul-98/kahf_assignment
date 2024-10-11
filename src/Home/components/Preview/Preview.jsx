@@ -42,5 +42,5 @@ Email: ${profileData.email}
                 </div>
             </div>
         </div>
-    )
+    );
 }
