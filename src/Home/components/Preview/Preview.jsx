@@ -23,7 +23,7 @@ Email: ${profileData.email}
                 toast.success("Links copied to clipboard!");
             })
             .catch(err => {
-                toast.error("Failed to copy links to clipboard. Please try again!");
+                toast.error("Failed to copy links to clipboard. Please try again!"), err;
             });
     };
 

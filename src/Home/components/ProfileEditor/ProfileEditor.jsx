@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import PageTitle from '../../../PageTitle/PageTitle';
 import { useForm } from 'react-hook-form';
 import UploadImage from './UploadImage/UploadImage';
@@ -53,7 +53,7 @@ export default function ProfileEditor() {
                     {inputFields.map(({ label, type, registerKey }, index) => (
                         <div className='grid md:grid-cols-3 mb-1' key={index}>
                             <p>{label}</p>
-                            <input className='col-span-2 border rounded-lg py-2 px-3 outline-none text-sm' type={type} {...register(registerKey)}  required/>
+                            <input className='col-span-2 border rounded-lg py-1 px-3 outline-none text-sm' type={type} {...register(registerKey)}  required/>
                         </div>
                     ))}
                 </div>

@@ -38,7 +38,7 @@ export default function DataCard() {
             <div>
                 <ProfileSkeleton />
             </div>
-            <div className={`${profileData ? 'mt-6' : 'mt-8'} space-y-[10px] h-[234px] scrollable`}>
+            <div className={`${profileData ? 'mt-6' : 'mt-8'} space-y-[10px] h-[234px] scrollable-link`}>
                 {displayedLinks.map((link) => (
                     <div
                         key={link.id}

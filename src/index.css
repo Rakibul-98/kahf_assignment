@@ -6,9 +6,9 @@
   overflow-y: auto;
   scrollbar-width: none;
 }
-@media (min-width: 768px) { /* Adjust the breakpoint as needed */
+@media (min-width: 768px) {
   .scrollable-profile {
-      overflow-y: visible; /* Remove scrolling */
+      overflow-y: visible;
   }
 }
 .common-nav{

@@ -1,21 +1,44 @@
-import { useState, useEffect, useContext } from 'react';
+/* eslint-disable react/prop-types */
+
+
+import { useState, useEffect, useContext, useMemo } from 'react';
 import { FaChevronDown, FaFacebookSquare, FaGripLines, FaInstagramSquare, FaLink, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { TbBrandGithubFilled } from 'react-icons/tb';
 import { AppContext } from '../../../../context/AppContext';
+import { useDrag, useDrop } from 'react-dnd';
 
-export default function LinkBoxes({ register, unregister, setValue, id, defaultLink, defaultPlatform, removeLinkBox }) {
+
+export default function LinkBoxes({ register, unregister, setValue, id, defaultLink, defaultPlatform, removeLinkBox,index, moveLink }) {
   const { handleRemoveLink } = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [error, setError] = useState('');
 
-  const linkOptions = [
+  const [{ isDragging }, drag] = useDrag({
+    type: 'LINK_BOX',
+    item: { id, index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const [, drop] = useDrop({
+    accept: 'LINK_BOX',
+    hover: (item) => {
+      if (item.index !== index) {
+        moveLink(item.index, index);
+        item.index = index;
+      }
+    },
+  });
+
+  const linkOptions = useMemo(() => [
     { value: 'GitHub', label: 'GitHub', icon: <TbBrandGithubFilled /> },
     { value: 'YouTube', label: 'YouTube', icon: <FaYoutube /> },
     { value: 'Linkedin', label: 'LinkedIn', icon: <FaLinkedin /> },
     { value: 'Facebook', label: 'Facebook', icon: <FaFacebookSquare /> },
     { value: 'Instagram', label: 'Instagram', icon: <FaInstagramSquare /> }
-  ];
+  ], []);
 
   const validateLink = (platform, link) => {
     const isValid = {
@@ -55,14 +78,16 @@ export default function LinkBoxes({ register, unregister, setValue, id, defaultL
       setSelectedOption(selected);
       register(`platform_${id}`, { value: defaultPlatform });
     }
-  }, [defaultPlatform, id, register]);
-
-
+  }, [defaultPlatform, id, register, linkOptions]);
 
   return (
-    <div className='bg-[#FAFAFA] p-3 mb-4 rounded-lg'>
+    <div className={`${isDragging ? 'opacity-50' : ''}bg-[#FAFAFA] p-3 mb-4 rounded-lg`}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+      }}
+    >
       <div className='flex justify-between'>
-        <h2 className='flex items-center gap-2'><FaGripLines />Link #{id}</h2>
+        <h2 ref={(node) => drag(drop(node))} title='Drag and drop to reorder' className='flex items-center gap-2 hover:cursor-move'><FaGripLines />Link #{id}</h2>
         <button className='hover:text-red-500 font-medium' onClick={handleRemove}>Remove</button>
       </div>
       <div className='space-y-2'>
@@ -112,3 +137,6 @@ export default function LinkBoxes({ register, unregister, setValue, id, defaultL
     </div>
   );
 }
+
+
+

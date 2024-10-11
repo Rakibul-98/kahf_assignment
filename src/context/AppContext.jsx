@@ -1,4 +1,6 @@
-import React, { createContext, useState } from 'react';
+/* eslint-disable react/prop-types */
+
+import { createContext, useState } from 'react';
 
 export const AppContext = createContext();
 
@@ -21,8 +23,7 @@ export const AppProvider = ({ children }) => {
 
     const handleRemoveLink = (id) => {
         const updatedLinkData = linkData.filter(link => link.id !== id);
-        setLinkData(updatedLinkData);
-        localStorage.setItem('linkData', JSON.stringify(updatedLinkData));
+        handleLinkDataChange(updatedLinkData);
     };
 
     const handleProfileDataChange = (newData) => {
@@ -42,6 +43,7 @@ export const AppProvider = ({ children }) => {
                 previewActive,
                 setPreviewActive,
                 handleRemoveLink,
+                setLinkData
             }}>
             {children}
         </AppContext.Provider>
