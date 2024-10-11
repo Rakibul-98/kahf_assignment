@@ -27,6 +27,17 @@ export default function LinkEditor() {
         }
     }, [displayedLinks]);
 
+    const validateLink = (platform, link) => {
+        const isValid = {
+            GitHub: link.includes('github.com'),
+            YouTube: link.includes('youtube.com'),
+            Linkedin: link.includes('linkedin.com'),
+            Facebook: link.includes('facebook.com'),
+            Instagram: link.includes('instagram.com'),
+        };
+        return isValid[platform];
+    };
+
     const onSubmit = (data) => {
         const updatedLinkBoxes = linkBoxes.map((box) => ({
             id: box.id,
@@ -37,10 +48,20 @@ export default function LinkEditor() {
             .filter((box) => !box.platform)
             .map((box) => box.id);
 
+        const invalidLinks = updatedLinkBoxes.filter((box) => {
+            return box.platform && !validateLink(box.platform, box.link);
+        }).map((box) => box.id);
+
         if (linkBoxes.length === 0) {
             return;
         } else if (missingPlatforms.length > 0) {
             toast.error(`Please select platform for links: ${missingPlatforms.join(', ')}`, {
+                style: { background: 'red' },
+                position: 'top-center',
+            });
+            return;
+        } else if (invalidLinks.length > 0) {
+            toast.error(`Invalid links for platforms: ${invalidLinks.join(', ')}`, {
                 style: { background: 'red' },
                 position: 'top-center',
             });
@@ -105,6 +126,7 @@ export default function LinkEditor() {
                                 defaultPlatform={box.platform || ''}
                                 removeLinkBox={() => removeLinkBox(box.id)}
                                 moveLink={moveLink}
+                                validateLink={validateLink}
                             />
                         ))}
                         <input

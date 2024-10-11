@@ -8,7 +8,7 @@ import { AppContext } from '../../../../context/AppContext';
 import { useDrag, useDrop } from 'react-dnd';
 
 
-export default function LinkBoxes({ register, unregister, setValue, id, defaultLink, defaultPlatform, removeLinkBox,index, moveLink }) {
+export default function LinkBoxes({ register, unregister, setValue, id, defaultLink, defaultPlatform, removeLinkBox, index, moveLink, validateLink }) {
   const { handleRemoveLink } = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -40,17 +40,6 @@ export default function LinkBoxes({ register, unregister, setValue, id, defaultL
     { value: 'Instagram', label: 'Instagram', icon: <FaInstagramSquare /> }
   ], []);
 
-  const validateLink = (platform, link) => {
-    const isValid = {
-      GitHub: link.includes('github.com'),
-      YouTube: link.includes('youtube.com'),
-      Linkedin: link.includes('linkedin.com'),
-      Facebook: link.includes('facebook.com'),
-      Instagram: link.includes('instagram.com'),
-    };
-    return isValid[platform];
-  };
-
   const handleSelect = (option) => {
     unregister(`platform_${id}`);
     setSelectedOption(option);
@@ -62,9 +51,12 @@ export default function LinkBoxes({ register, unregister, setValue, id, defaultL
 
   const handleLinkChange = (e) => {
     const link = e.target.value;
-    const isValid = validateLink(selectedOption.value, link);
-    setError(isValid ? '' : `Invalid ${selectedOption.label} link`);
-    setValue(`link_${id}`, link);
+    const isValid = validateLink(selectedOption?.value, link);
+    if (isValid) {
+      setError('');
+    } else {
+      setError(`Please provide valid ${selectedOption.label} link`);
+    }
   };
 
   const handleRemove = () => {
